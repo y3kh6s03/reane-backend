@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y zip unzip && \
     a2enmod rewrite && \
     a2ensite 000-default.conf
 
-WORKDIR /var/www/reane-backend
+WORKDIR /var/www
 
 COPY . /var/www/reane-backend
 
