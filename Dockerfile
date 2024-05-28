@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y zip unzip && \
 
 WORKDIR /var/www/reane-backend
 
-COPY ./ /var/www/reane-backend
+COPY . /var/www/reane-backend
 
 RUN composer install
 RUN php artisan key:generate
