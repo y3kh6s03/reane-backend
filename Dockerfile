@@ -13,6 +13,6 @@ WORKDIR /var/www/reane-backend
 COPY . /var/www/reane-backend
 
 RUN cd /var/www/reane-backend/src && composer install
-RUN php artisan key:generate
+RUN cd /var/www/reane-backend/src && php artisan key:generate
 
 CMD ["apache2-foreground"]
