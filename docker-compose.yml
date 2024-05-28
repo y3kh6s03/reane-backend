@@ -10,7 +10,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./src:/var/www
+      - ./src:/var/www/reane-backend
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=reane-db.ctmy8geo4ay7.ap-northeast-1.rds.amazonaws.com
