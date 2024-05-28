@@ -4,9 +4,15 @@ COPY --from=composer:2.4 /usr/bin/composer /usr/bin/composer
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update && apt-get install -y zip unzip && \
-    docker-php-ext-install pdo pdo_mysql bcmath
+    docker-php-ext-install pdo pdo_mysql bcmath && \
+    a2enmod rewrite && \
+    a2ensite 000-default.conf
 
 WORKDIR /var/www
 
-RUN echo "Listen 8080" >> /etc/apache2/ports.conf && \
-    a2enmod rewrite
+COPY . /var/www
+
+RUN composer install
+RUN php artisan key:generate
+
+CMD ["apache2-foreground"]
