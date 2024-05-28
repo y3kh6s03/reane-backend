@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y zip unzip && \
     a2enmod rewrite && \
     a2ensite 000-default.conf
 
-WORKDIR /var/www
+WORKDIR /var/www/reane-backend/src
 
-COPY . /var/www
+COPY ./src /var/www/reane-backend/src
 
 RUN composer install
 RUN php artisan key:generate
