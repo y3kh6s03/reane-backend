@@ -7,9 +7,9 @@ use App\Models\Reach;
 use App\Models\Skill;
 use Illuminate\Support\Facades\Log;
 
-class CreateResponseDataService
+class CreateDataAndResponseService
 {
-  public static function createResponseData($req)
+  public static function createDataAndResponse($req)
   {
     $reach = Reach::create([
       'name' => $req->input('reachName'),
@@ -27,7 +27,7 @@ class CreateResponseDataService
         'reach_id' => $reach->id,
       ]);
       $actions = $val;
-      if (count($actions) >= 1) {
+      if (count($actions) > 0) {
         foreach ($actions as $key => $actionData) {
           $actionCount++;
           $actionName = key($actionData);
@@ -35,7 +35,7 @@ class CreateResponseDataService
             'name' => $actionName,
             'skill_id' => $skill->id,
             'reach_id' => $reach->id,
-            'is_completed' => $actionData[$actionName]
+            'is_completed' => 0
           ]);
           $skillDatas[$skillName][] = array($action->name => $action->is_completed);
         }

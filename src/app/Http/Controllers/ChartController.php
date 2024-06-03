@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Action;
 use App\Models\Reach;
 use App\Models\Skill;
-use App\Services\CreateResponseDataService;
+use App\Services\CreateDataAndResponseService;
 use App\Services\DateCalcService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -88,7 +88,7 @@ class ChartController extends Controller
     try {
       DB::beginTransaction();
 
-      $chartData = CreateResponseDataService::CreateResponseData($req);
+      $chartData = CreateDataAndResponseService::CreateDataAndResponse($req);
 
       DB::commit();
 
