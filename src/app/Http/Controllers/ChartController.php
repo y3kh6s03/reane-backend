@@ -36,10 +36,10 @@ class ChartController extends Controller
       foreach ($chartData->skills as $skill) {
         $actions = [];
         foreach ($skill->actions as $key => $action) {
-          $actions[$key]=[
-            'id'=>$action->id,
-            'name'=>$action->name,
-            'isCompleted'=>$action->is_completed,
+          $actions[$key] = [
+            'id' => $action->id,
+            'name' => $action->name,
+            'isCompleted' => $action->is_completed,
           ];
           // $actions[$action->name] = $action->is_completed;
 
@@ -97,5 +97,33 @@ class ChartController extends Controller
       DB::rollBack();
       return response()->json(['error' => $e->getMessage()]);
     }
+  }
+
+  public function edit(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'userEmail' => 'required|email|max:255',
+      'reachName' => 'required|string|max:255',
+      'editSkillName' => 'required|string|max:255',
+      'currentSkillName' => 'required|string|max:255',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors('文字列が多すぎます')
+      ], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+      $reach = Reach::where('name', $req->reachName)->firstOrFail();
+      $skill = $reach->skills()->where('name', $req->currentSkillName)->firstOrFail();
+
+      $skill->update(['name' => $req->editSkillName]);
+      DB::commit();
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => $e->getMessage()]);
+    }
+    return response()->json($skill);
   }
 }

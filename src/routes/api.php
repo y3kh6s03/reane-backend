@@ -26,4 +26,5 @@ Route::prefix('/myChart')
 ->group(function(){
 	Route::post('/', 'index')->name('index');
 	Route::post('/create', 'store')->name('store');
+	Route::post('/{reach}', 'edit')->name('edit');
 });
