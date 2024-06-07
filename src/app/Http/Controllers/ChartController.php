@@ -115,15 +115,56 @@ class ChartController extends Controller
 
     try {
       DB::beginTransaction();
-      $reach = Reach::where('name', $req->reachName)->firstOrFail();
-      $skill = $reach->skills()->where('name', $req->currentSkillName)->firstOrFail();
 
+      $reach = Reach::where('user_email', $req->userEmail)
+        ->where('name', $req->reachName)
+        ->firstOrFail();
+
+      $skill = $reach->skills()->where('name', $req->currentSkillName)->firstOrFail();
       $skill->update(['name' => $req->editSkillName]);
+
       DB::commit();
     } catch (Exception $e) {
       DB::rollBack();
-      return response()->json(['error' => $e->getMessage()]);
+      return response()->json(['error' => $e->getMessage()], 500);
     }
     return response()->json($skill);
+  }
+
+  public function delete(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'userEmail' => 'required|email|max:255',
+      'reachName' => 'required|string|max:255',
+      'skillName' => 'required|string|max:255',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors()
+      ], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+
+      $reach = Reach::where('user_email', $req->userEmail)
+        ->where('name', $req->reachName)
+        ->firstOrFail();
+
+      $skill = $reach->skills()->where('name', $req->skillName)->firstOrFail();
+      $actions = Action::where('skill_id', $skill->id)->get();
+
+      foreach ($actions as $action) {
+        $action->delete();
+      }
+
+      $skill->delete();
+
+      DB::commit();
+      return response()->json(['message' => '削除成功'], 200);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => $e->getMessage()], 500);
+    }
   }
 }

@@ -27,4 +27,5 @@ Route::prefix('/myChart')
 	Route::post('/', 'index')->name('index');
 	Route::post('/create', 'store')->name('store');
 	Route::post('/{reach}', 'edit')->name('edit');
+	Route::delete('/{reach}', 'delete')->name('delete');
 });
