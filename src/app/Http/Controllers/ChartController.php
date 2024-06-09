@@ -8,6 +8,7 @@ use App\Models\Skill;
 use App\Services\CreateDataAndResponseService;
 use App\Services\DateCalcService;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,7 +100,7 @@ class ChartController extends Controller
     }
   }
 
-  public function edit(Request $req): JsonResponse
+  public function skillEdit(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
       'userEmail' => 'required|email|max:255',
@@ -131,7 +132,7 @@ class ChartController extends Controller
     return response()->json($skill);
   }
 
-  public function delete(Request $req): JsonResponse
+  public function skillDelete(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
       'userEmail' => 'required|email|max:255',
@@ -166,5 +167,55 @@ class ChartController extends Controller
       DB::rollBack();
       return response()->json(['error' => $e->getMessage()], 500);
     }
+  }
+
+  public function actionEdit(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'reachName' => 'required|string|max:255',
+      'skillName' => 'required|string|max:255',
+      'actionId' => 'required|numeric',
+      'actionName' => 'required|string|max:255',
+      'editActionName' => 'required|string|max:255',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors()
+      ], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+
+      $action = Action::where('id', $req->actionId)->first();
+      if ($action) {
+        $action->update(['name' => $req->editActionName]);
+      } else {
+        DB::rollBack();
+        return response()->json([
+          'error' => 'Action not found.'
+        ], 404);
+      }
+
+      DB::commit();
+    } catch (QueryException $e) {
+      DB::rollBack();
+      return response()->json([
+        'error' => 'Database query error occurred while updating the action.'
+      ], 500);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json([
+        'error' => 'An unexpected error occurred while updating the action.'
+      ], 500);
+    }
+
+    return response()->json(null, 204);
+  }
+
+  public function actionDelete(Request $req): JsonResponse
+  {
+    $reqData = $req->all();
+    return response()->json($reqData);
   }
 }
