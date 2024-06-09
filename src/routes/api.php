@@ -17,15 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });
 
 Route::prefix('/myChart')
-->controller(ChartController::class)
-->name('reana')
-->group(function(){
-	Route::post('/', 'index')->name('index');
-	Route::post('/create', 'store')->name('store');
-	Route::post('/{reach}', 'edit')->name('edit');
-	Route::delete('/{reach}', 'delete')->name('delete');
-});
+	->controller(ChartController::class)
+	->name('reana')
+	->group(function () {
+		Route::post('/', 'index')->name('index');
+		Route::post('/create', 'store')->name('store');
+		Route::post('/{reach}/{skillName}', 'skillEdit')->name('skillEdit');
+		Route::delete('/{reach}', 'skillDelete')->name('skillDelete');
+		Route::post('/{reach}/{skillName}/{actionName}', 'actionEdit')->name('actionEdit');
+	});
