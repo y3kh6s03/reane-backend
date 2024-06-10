@@ -96,7 +96,7 @@ class ChartController extends Controller
 
       DB::commit();
 
-      return response()->json($chartData, '正常に処理ができました');
+      return response()->json('正常に処理ができました');
     } catch (Exception $e) {
       DB::rollBack();
       return response()->json(['error' => $e->getMessage()]);
