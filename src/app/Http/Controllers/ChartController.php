@@ -49,7 +49,10 @@ class ChartController extends Controller
             $executedActionCount++;
           }
         }
-        $skills[$skill->name] = $actions;
+        $skills[$skill->name] = [
+          'id' => $skill->id,
+          'actions' => $actions,
+        ];
       }
 
       $resChartDatas[] = [
