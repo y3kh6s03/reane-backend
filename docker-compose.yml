@@ -17,7 +17,7 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=reane
       - DB_USERNAME=root
-      - DB_PASSWORD=password
+      - DB_PASSWORD=ga255430
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -25,7 +25,7 @@ services:
       PMA_HOST: reane-db.ctmy8geo4ay7.ap-northeast-1.rds.amazonaws.com
       PMA_PORT: 3306
       PMA_USER: root
-      PMA_PASSWORD: password
+      PMA_PASSWORD: ga255430
     ports:
       - 8081:80
     networks:
