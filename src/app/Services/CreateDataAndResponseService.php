@@ -26,7 +26,7 @@ class CreateDataAndResponseService
         'name' => $skillName,
         'reach_id' => $reach->id,
       ]);
-      $actions = $val;
+      $actions = $val['actions'];
       if (count($actions) > 0) {
         foreach ($actions as $key => $actionData) {
           $actionCount++;
