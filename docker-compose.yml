@@ -22,8 +22,10 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mysql_db
+      PMA_HOST: reane-db.ctmy8geo4ay7.ap-northeast-1.rds.amazonaws.com
       PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
     ports:
       - 8081:80
     networks:
