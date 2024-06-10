@@ -221,4 +221,12 @@ class ChartController extends Controller
     $reqData = $req->all();
     return response()->json($reqData);
   }
+
+  public function getTest(){
+    return response()->json('getTest OK!!!!!!!');
+  }
+
+  public function postTest(){
+    return response()->json('getTest OK!!!!!!!');
+  }
 }

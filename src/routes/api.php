@@ -29,4 +29,6 @@ Route::prefix('/myChart')
 		Route::post('/{reach}/{skillName}', 'skillEdit')->name('skillEdit');
 		Route::delete('/{reach}', 'skillDelete')->name('skillDelete');
 		Route::post('/{reach}/{skillName}/{actionName}', 'actionEdit')->name('actionEdit');
+		Route::get('/test','getTest')->name('get-test');
+		Route::post('/test','postTest')->name('postt-test');
 	});
