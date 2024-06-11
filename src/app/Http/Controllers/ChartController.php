@@ -227,6 +227,6 @@ class ChartController extends Controller
   }
 
   public function postTest(){
-    return response()->json('getTest OK!!!!!!!');
+    return response()->json('postTest OK!!!!!!!');
   }
 }
