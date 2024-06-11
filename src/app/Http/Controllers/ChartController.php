@@ -218,15 +218,19 @@ class ChartController extends Controller
 
   public function actionDelete(Request $req): JsonResponse
   {
-    $reqData = $req->all();
-    return response()->json($reqData);
+    $actionId = $req->actionId;
+    $action = Action::where('id', $actionId)->firstOrFail();
+    $action->delete();
+    return response()->json($action);
   }
 
-  public function getTest(){
+  public function getTest()
+  {
     return response()->json('getTest OK!!!!!!!');
   }
 
-  public function postTest(){
+  public function postTest()
+  {
     return response()->json('postTest OK!!!!!!!');
   }
 }
