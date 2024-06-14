@@ -172,7 +172,7 @@ class ChartController extends Controller
     }
   }
 
-  public function actionEdit(Request $req): JsonResponse
+  public function actionStore(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
       'reachName' => 'required|string|max:255',
@@ -192,7 +192,10 @@ class ChartController extends Controller
 
       $action = Action::where('id', $req->actionId)->first();
       if ($action) {
-        $action->update(['name' => $req->editActionName]);
+        $result = $action->update(['name' => $req->editActionName]);
+        if ($result) {
+          $updatedAction = $action->fresh();
+        }
       } else {
         DB::rollBack();
         return response()->json([
@@ -201,6 +204,7 @@ class ChartController extends Controller
       }
 
       DB::commit();
+      return response()->json($updatedAction);
     } catch (QueryException $e) {
       DB::rollBack();
       return response()->json([
@@ -214,6 +218,65 @@ class ChartController extends Controller
     }
 
     return response()->json(null, 204);
+  }
+
+  public function actionPut(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'reachName' => 'required|string|max:255',
+      'userEmail' => 'required|email|max:255',
+      'skillName' => 'required|string|max:255',
+      'modalActions' => 'required|array',
+      'modalActions.*.id' => 'nullable|integer',
+      'modalActions.*.name' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    DB::beginTransaction();
+
+    try {
+      $updateActions = [];
+      $reachId = Reach::where('name', $req->reachName)
+        ->where('user_email', $req->userEmail)
+        ->firstOrFail()->id;
+      $skillId = Skill::where('name', $req->skillName)
+        ->where('reach_id', $reachId)
+        ->firstOrFail()->id;
+      foreach ($req->modalActions as $data) {
+        if (empty($data['id'])) {
+          $createdAction = Action::create([
+            'name' => $data['name'],
+            'reach_id' => $reachId,
+            'skill_id' => $skillId,
+            'is_completed' => 0
+          ]);
+          $updateActions[] = [
+            'id' => $createdAction->id,
+            'name' => $createdAction->name,
+            'isCompleted' => $createdAction->is_completed,
+          ];
+        } else {
+          $existingData = Action::findOrFail($data['id']);
+          if ($data['name'] !== $existingData->name) {
+            $existingData->update(['name' => $data['name']]);
+          }
+          $existingData->fresh();
+          $updateActions[] = [
+            'id' => $existingData->id,
+            'name' => $existingData->name,
+            'isCompleted' => $existingData->is_completed,
+          ];
+        }
+      }
+      DB::commit();
+      return response()->json($updateActions, 200);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => 'An error occurred while processing actions.'], 500);
+    }
   }
 
   public function actionDelete(Request $req): JsonResponse

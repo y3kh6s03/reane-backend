@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('reach_id')->constrained();
             $table->foreignId('skill_id')->constrained();
             $table->timestamps();
+            $table->unique(['skill_id', 'name']);
         });
     }
 
