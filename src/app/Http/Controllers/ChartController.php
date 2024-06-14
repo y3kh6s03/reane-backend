@@ -279,6 +279,31 @@ class ChartController extends Controller
     }
   }
 
+  public function actionPatch(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'actionId' => 'required|numeric',
+      'isCompleted' => 'required|numeric|in:0,1',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+      $action = Action::findOrFail($req->actionId);
+      $newIsCompleted = $req->isCompleted === 1 ? 0 : 1;
+      $action->update(['is_completed' => $newIsCompleted]);
+      DB::commit();
+      return response()->json($action, 200);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => 'An error occurred while processing actions.'], 500);
+    }
+  }
+
+
   public function actionDelete(Request $req): JsonResponse
   {
     $actionId = $req->actionId;

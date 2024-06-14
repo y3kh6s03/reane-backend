@@ -35,6 +35,7 @@ Route::prefix('/myChart')
 
 		Route::post('/{reach}/{skill}/{action}', 'actionStore')->name('actionStore');
 		Route::put('/{reach}/{skill}/{action}', 'actionPut')->name('actionPut');
+		Route::patch('/{reach}/{skill}/{action}', 'actionPatch')->name('actionPatch');
 		Route::delete('/{reach}/{skill}/{action}', 'actionDelete')->name('actionDelete');
 
 		Route::get('/test', 'getTest')->name('get-test');
