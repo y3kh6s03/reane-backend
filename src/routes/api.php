@@ -24,12 +24,19 @@ Route::prefix('/myChart')
 	->controller(ChartController::class)
 	->name('reana')
 	->group(function () {
+
 		Route::post('/', 'index')->name('index');
+
 		Route::post('/create', 'store')->name('store');
+
 		Route::post('/{reach}/{skillName}', 'skillEdit')->name('skillEdit');
+
 		Route::delete('/{reach}', 'skillDelete')->name('skillDelete');
-		Route::post('/{reach}/{skillName}/{actionName}', 'actionEdit')->name('actionEdit');
-		Route::delete('/{reach}/{skillName}/{actionName}', 'actionDelete')->name('actionDelete');
-		Route::get('/test','getTest')->name('get-test');
-		Route::post('/test','postTest')->name('postt-test');
+
+		Route::post('/{reach}/{skill}/{action}', 'actionStore')->name('actionStore');
+		Route::put('/{reach}/{skill}/{action}', 'actionPut')->name('actionPut');
+		Route::delete('/{reach}/{skill}/{action}', 'actionDelete')->name('actionDelete');
+
+		Route::get('/test', 'getTest')->name('get-test');
+		Route::post('/test', 'postTest')->name('postt-test');
 	});
