@@ -103,6 +103,39 @@ class ChartController extends Controller
     }
   }
 
+  public function reachPatch(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'id' => 'required|numeric',
+      'editReachName' => 'required|string|max:255',
+      'userEmail' => 'required|email|max:255',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors('バリデーションエラー')
+      ], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+
+      $reach = Reach::findOrFail($req->id);
+      $reach->update(['name' => $req->editReachName]);
+
+      DB::commit();
+
+      return response()->json([
+        'message' => 'Reach name updated successfully',
+        'reach' => $reach
+      ], 200);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => $e->getMessage()], 500);
+    }
+  }
+
+
   public function skillEdit(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
@@ -302,7 +335,6 @@ class ChartController extends Controller
       return response()->json(['error' => 'An error occurred while processing actions.'], 500);
     }
   }
-
 
   public function actionDelete(Request $req): JsonResponse
   {
