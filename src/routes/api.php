@@ -31,14 +31,14 @@ Route::prefix('/myChart')
 
 		Route::patch('/reach/{id}', 'reachPatch')->name('reachPatch');
 
-		Route::post('/{reach}/{skillName}', 'skillEdit')->name('skillEdit');
+		Route::post('/reach/skill/{skillName}', 'skillEdit')->name('skillEdit');
+		Route::patch('/reach/skill/{skillName}', 'skillPatch')->name('skillPatch');
+		Route::delete('/reach/skill/{skillName}', 'skillDelete')->name('skillDelete');
 
-		Route::delete('/{reach}', 'skillDelete')->name('skillDelete');
-
-		Route::post('/{reach}/{skill}/{action}', 'actionStore')->name('actionStore');
-		Route::put('/{reach}/{skill}/{action}', 'actionPut')->name('actionPut');
-		Route::patch('/{reach}/{skill}/{action}', 'actionPatch')->name('actionPatch');
-		Route::delete('/{reach}/{skill}/{action}', 'actionDelete')->name('actionDelete');
+		Route::post('/reach/skill/action/{actionid}', 'actionStore')->name('actionStore');
+		Route::put('/reach/skill/action/{actionid}', 'actionPut')->name('actionPut');
+		Route::patch('/reach/skill/action/{actionid}', 'actionPatch')->name('actionPatch');
+		Route::delete('/reach/skill/action/{actionid}', 'actionDelete')->name('actionDelete');
 
 		Route::get('/test', 'getTest')->name('get-test');
 		Route::post('/test', 'postTest')->name('postt-test');

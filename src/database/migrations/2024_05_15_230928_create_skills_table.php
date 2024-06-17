@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name',255);
             $table->foreignId('reach_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->unique(['reach_id', 'name']);
         });
     }
 
