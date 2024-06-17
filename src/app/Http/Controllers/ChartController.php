@@ -139,6 +139,7 @@ class ChartController extends Controller
   public function skillEdit(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
+      'id' => 'required|numeric',
       'userEmail' => 'required|email|max:255',
       'reachName' => 'required|string|max:255',
       'editSkillName' => 'required|string|max:255',
@@ -154,23 +155,54 @@ class ChartController extends Controller
       DB::beginTransaction();
 
       $reach = Reach::where('user_email', $req->userEmail)
-        ->where('name', $req->reachName)
+        ->where('id', $req->id)
         ->firstOrFail();
 
       $skill = $reach->skills()->where('name', $req->currentSkillName)->firstOrFail();
       $skill->update(['name' => $req->editSkillName]);
 
       DB::commit();
+      return response()->json($skill);
     } catch (Exception $e) {
       DB::rollBack();
       return response()->json(['error' => $e->getMessage()], 500);
     }
-    return response()->json($skill);
+  }
+
+  public function skillPatch(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'id' => 'required|numeric',
+      'userEmail' => 'required|email|max:255',
+      'inputSkillName' => 'required|string|max:255',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors('文字列が多すぎます')
+      ], 422);
+    }
+
+    try {
+      DB::beginTransaction();
+      $reach = Reach::where('user_email', $req->userEmail)
+        ->where('id', $req->id)
+        ->firstOrFail();
+      $addedSkill = Skill::create([
+        'reach_id' => $reach->id,
+        'name' => $req->inputSkillName
+      ]);
+      DB::commit();
+      return response()->json($addedSkill);
+    } catch (Exception $e) {
+      DB::rollBack();
+      return response()->json(['error' => $e->getMessage()], 500);
+    }
   }
 
   public function skillDelete(Request $req): JsonResponse
   {
     $validator = Validator::make($req->all(), [
+      'id' => 'required|numeric',
       'userEmail' => 'required|email|max:255',
       'reachName' => 'required|string|max:255',
       'skillName' => 'required|string|max:255',
@@ -185,7 +217,7 @@ class ChartController extends Controller
       DB::beginTransaction();
 
       $reach = Reach::where('user_email', $req->userEmail)
-        ->where('name', $req->reachName)
+        ->where('id', $req->id)
         ->firstOrFail();
 
       $skill = $reach->skills()->where('name', $req->skillName)->firstOrFail();
@@ -320,7 +352,7 @@ class ChartController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response()->json(['errors' => $validator->errors()], 422);
+      return response()->json(['errors' => $validator->errors(), '$reqDataの中身' => $req], 422);
     }
 
     try {
@@ -334,6 +366,7 @@ class ChartController extends Controller
       DB::rollBack();
       return response()->json(['error' => 'An error occurred while processing actions.'], 500);
     }
+    return response()->json('$req');
   }
 
   public function actionDelete(Request $req): JsonResponse
