@@ -135,6 +135,29 @@ class ChartController extends Controller
     }
   }
 
+  public function reachDelete(Request $req): JsonResponse
+  {
+    $validator = Validator::make($req->all(), [
+      'id' => 'required|numeric',
+      'userEmail' => 'required|email|max:255',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'errors' => $validator->errors('idとuserEmailの値が正しくありません。')
+      ], 422);
+    }
+    try {
+      $actions = Action::where(['reach_id'=>$req->id])->delete();
+      $skills = Skill::where(['reach_id'=>$req->id])->delete();
+      $reach = Reach::where(['id'=>$req->id])->delete();
+      return response()->json($actions);
+    } catch (Exception $e) {
+      return response()->json([
+        'error'=>$e->getMessage()
+      ]);
+    }
+    return response()->json('reach delete!!!!!');
+  }
 
   public function skillEdit(Request $req): JsonResponse
   {

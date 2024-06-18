@@ -30,6 +30,7 @@ Route::prefix('/myChart')
 		Route::post('/create', 'store')->name('store');
 
 		Route::patch('/reach/{id}', 'reachPatch')->name('reachPatch');
+		Route::delete('/reach/{id}', 'reachDelete')->name('reachDelete');
 
 		Route::post('/reach/skill/{skillName}', 'skillEdit')->name('skillEdit');
 		Route::patch('/reach/skill/{skillName}', 'skillPatch')->name('skillPatch');
