@@ -42,7 +42,6 @@ class ChartController extends Controller
             'name' => $action->name,
             'isCompleted' => $action->is_completed,
           ];
-          // $actions[$action->name] = $action->is_completed;
 
           $actionCount++;
           if ($action->is_completed === 1) {
@@ -66,6 +65,7 @@ class ChartController extends Controller
         'executedActionCount' => $executedActionCount,
         'days' => $days,
         'createdAt' => $chartData->created_at,
+        'updatedAt' => $chartData->updated_at,
       ];
     }
 

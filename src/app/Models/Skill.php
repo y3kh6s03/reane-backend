@@ -16,6 +16,21 @@ class Skill extends Model
         "reach_id"
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($skill) {
+            $skill->reach->touch();
+        });
+
+        static::updating(function ($skill) {
+            $skill->reach->touch();
+        });
+
+        static::deleting(function ($skill) {
+            $skill->reach->touch();
+        });
+    }
+
     public function reach(): BelongsTo
     {
         return $this->belongsTo(Reach::class);

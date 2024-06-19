@@ -17,6 +17,21 @@ class Action extends Model
         'is_completed',
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($action) {
+            $action->reach->touch();
+        });
+
+        static::updating(function ($action) {
+            $action->reach->touch();
+        });
+
+        static::deleting(function ($action) {
+            $action->reach->touch();
+        });
+    }
+
     public function reach(): BelongsTo
     {
         return $this->belongsTo(Reach::class);
