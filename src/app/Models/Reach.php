@@ -25,4 +25,8 @@ class Reach extends Model
     {
         return $this->hasMany(Action::class);
     }
+    public function journals(): HasMany
+    {
+        return $this->hasMany(Action::class);
+    }
 }

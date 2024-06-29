@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\Testcontroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,11 @@ Route::prefix('/myChart')
 
 		Route::get('/test', 'getTest')->name('get-test');
 		Route::post('/test', 'postTest')->name('postt-test');
+	});
+
+Route::prefix('/journal')
+	->controller(JournalController::class)
+	->name('reana')
+	->group(function () {
+		Route::post('/', 'store')->name('store');
 	});
