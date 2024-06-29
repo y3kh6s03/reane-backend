@@ -7,35 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Action extends Model
+class Journal extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'name',
-        'skill_id',
         'reach_id',
-        'is_completed',
+        'skill_id',
+        'description',
     ];
 
     protected static function booted()
     {
-        static::creating(function ($action) {
-            $action->reach->touch();
+        static::creating(function ($journal) {
+            $journal->reach->touch();
         });
 
-        static::updating(function ($action) {
-            $action->reach->touch();
+        static::updating(function ($journal) {
+            $journal->reach->touch();
         });
 
-        static::deleting(function ($action) {
-            $action->reach->touch();
+        static::deleting(function ($journal) {
+            $journal->reach->touch();
         });
     }
 
     public function reach(): BelongsTo
     {
-        return $this->belongsTo(Reach::class);
+        return $this->belongsTo(Skill::class);
     }
 
     public function skill(): BelongsTo
@@ -43,8 +40,10 @@ class Action extends Model
         return $this->belongsTo(Skill::class);
     }
 
-    public function journals(): BelongsToMany
+    public function actions(): BelongsToMany
     {
-        return $this->belongsToMany(Journal::class, 'action_journal')->withTimestamps();
+        return $this->belongsToMany(Action::class, 'action_journal')->withTimestamps();
     }
+
+    use HasFactory;
 }

@@ -147,13 +147,13 @@ class ChartController extends Controller
       ], 422);
     }
     try {
-      $actions = Action::where(['reach_id'=>$req->id])->delete();
-      $skills = Skill::where(['reach_id'=>$req->id])->delete();
-      $reach = Reach::where(['id'=>$req->id])->delete();
+      $actions = Action::where(['reach_id' => $req->id])->delete();
+      $skills = Skill::where(['reach_id' => $req->id])->delete();
+      $reach = Reach::where(['id' => $req->id])->delete();
       return response()->json($actions);
     } catch (Exception $e) {
       return response()->json([
-        'error'=>$e->getMessage()
+        'error' => $e->getMessage()
       ]);
     }
     return response()->json('reach delete!!!!!');
