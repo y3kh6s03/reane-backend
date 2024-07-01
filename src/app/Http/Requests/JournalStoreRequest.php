@@ -22,6 +22,7 @@ class JournalStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_email' => 'required|email',
             'reach_id' => 'required|numeric',
             'skill_id' => 'required|numeric',
             'data.actionNames' => 'required|array',
@@ -35,6 +36,7 @@ class JournalStoreRequest extends FormRequest
         return [
             'required' => '必須項目が送信されていません。',
             'numeric' => '送信されたデータが適合していません',
+            'user_email.email' => '正しいメールアドレスを入力してください。',
             'data.actionNames.*.select.required' => 'actionNamesのselectフィールドは必須です。',
             'description.max' => '文字数オーバーです。500文字までで入力してください。'
         ];
