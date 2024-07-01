@@ -50,5 +50,6 @@ Route::prefix('/journal')
 	->controller(JournalController::class)
 	->name('reana')
 	->group(function () {
-		Route::post('/', 'store')->name('store');
+		Route::post('/', 'index')->name('index');
+		Route::post('/store', 'store')->name('store');
 	});
