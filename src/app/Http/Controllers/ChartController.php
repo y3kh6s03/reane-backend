@@ -141,22 +141,22 @@ class ChartController extends Controller
       'id' => 'required|numeric',
       'userEmail' => 'required|email|max:255',
     ]);
+
     if ($validator->fails()) {
       return response()->json([
-        'errors' => $validator->errors('idとuserEmailの値が正しくありません。')
+        'errors' => $validator->errors()->all()
       ], 422);
     }
+
     try {
-      $actions = Action::where(['reach_id' => $req->id])->delete();
-      $skills = Skill::where(['reach_id' => $req->id])->delete();
-      $reach = Reach::where(['id' => $req->id])->delete();
-      return response()->json($actions);
+      $reach = Reach::findOrFail($req->id);
+      $reach->delete();
+      return response()->json('Reach deleted successfully.');
     } catch (Exception $e) {
       return response()->json([
         'error' => $e->getMessage()
-      ]);
+      ], 500);
     }
-    return response()->json('reach delete!!!!!');
   }
 
   public function skillEdit(Request $req): JsonResponse
@@ -244,12 +244,6 @@ class ChartController extends Controller
         ->firstOrFail();
 
       $skill = $reach->skills()->where('name', $req->skillName)->firstOrFail();
-      $actions = Action::where('skill_id', $skill->id)->get();
-
-      foreach ($actions as $action) {
-        $action->delete();
-      }
-
       $skill->delete();
 
       DB::commit();

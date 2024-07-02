@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name',255);
             $table->boolean('is_completed')->default(false);
-            $table->foreignId('reach_id')->constrained();
-            $table->foreignId('skill_id')->constrained();
+            $table->foreignId('reach_id')->constrained()->onDelete('cascade');
+            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->unique(['skill_id', 'name']);
         });
