@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
             $table->string('user_email', 255);
-            $table->foreignId('reach_id')->constrained();
-            $table->foreignId('skill_id')->constrained();
+            $table->foreignId('reach_id')->constrained()->onDelete('cascade');
+            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });
