@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\JournalController;
-use App\Http\Controllers\Testcontroller;
+use App\Http\Controllers\MyChartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +21,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 	return $request->user();
 });
 
-Route::prefix('/myChart')
+Route::prefix('/chart')
 	->controller(ChartController::class)
-	->name('reana')
+	->name('chart')
+	->group(function () {
+		Route::get('/all', 'getAllUsersChart')->name('getAllUsersChart');
+	});
+
+Route::prefix('/myChart')
+	->controller(MyChartController::class)
+	->name('myChart')
 	->group(function () {
 
 		Route::post('/', 'index')->name('index');
@@ -48,7 +55,7 @@ Route::prefix('/myChart')
 
 Route::prefix('/journal')
 	->controller(JournalController::class)
-	->name('reana')
+	->name('journal')
 	->group(function () {
 		Route::post('/', 'index')->name('index');
 		Route::post('/store', 'store')->name('store');
