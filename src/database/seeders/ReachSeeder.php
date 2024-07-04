@@ -18,8 +18,8 @@ class ReachSeeder extends Seeder
         $reaches = [
             [
                 'name' => '体重49kg以下の達成',
-                'user_email' => 'hanahana19953131@gmail.com',
-                'user_name' => 'hanahana',
+                'user_email' => 'yaseko19953131@gmail.com',
+                'user_name' => 'yaseko',
                 'user_image' => 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg',
                 'created_at' => $now,
                 'updated_at' => $now,
