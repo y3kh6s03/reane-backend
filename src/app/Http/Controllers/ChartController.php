@@ -11,10 +11,9 @@ class ChartController extends Controller
 {
   public function getAllUsersChart(): JsonResponse
   {
-    $allUsersCharts = Reach::with('skills.actions')->get();
+    $allUsersCharts = Reach::with('skills.actions')->orderBy("created_at", "desc")->paginate();
 
-    $response = [];
-    foreach ($allUsersCharts as $reach) {
+    $response = $allUsersCharts->map(function ($reach) {
       $createdAt = new Carbon($reach->created_at);
       $updatedAt = new Carbon($reach->updated_at);
       $days = $createdAt->diffInDays($updatedAt);
@@ -36,7 +35,7 @@ class ChartController extends Controller
         return $skill->actions->where('is_completed', true)->count();
       });
 
-      $response[$reach->id] = [
+      return [
         'id' => $reach->id,
         'userName' => $reach->user_name,
         'userImage' => $reach->user_image,
@@ -49,7 +48,7 @@ class ChartController extends Controller
         'createdAt' => $reach->created_at->toDateTimeString(),
         'updatedAt' => $reach->updated_at->toDateTimeString(),
       ];
-    }
+    })->values()->all();
 
     return response()->json($response);
   }
