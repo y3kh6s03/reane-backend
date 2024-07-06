@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class ChartController extends Controller
 {
-  public function getAllUsersChart(): JsonResponse
+  public function getAllUsersChart(Request $req): JsonResponse
   {
-    $allUsersCharts = Reach::with('skills.actions')->orderBy("created_at", "desc")->paginate();
+    $per_page = $req->query('per_page', 20);
+    $page = $req->query('page', 1);
+    $allUsersCharts = Reach::with('skills.actions')->orderBy("created_at", "desc")->paginate($per_page, ['*'], 'page', $page);
 
     $response = $allUsersCharts->map(function ($reach) {
       $createdAt = new Carbon($reach->created_at);
@@ -50,6 +52,12 @@ class ChartController extends Controller
       ];
     })->values()->all();
 
-    return response()->json($response);
+    return response()->json([
+      'data' => $response,
+      'current_page' => $allUsersCharts->currentPage(),
+      'last_page' => $allUsersCharts->lastPage(),
+      'per_page' => $allUsersCharts->perPage(),
+      'total' => $allUsersCharts->total()
+    ]);
   }
 }
