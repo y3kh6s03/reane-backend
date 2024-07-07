@@ -18,8 +18,8 @@ class ReachSeeder extends Seeder
         $reaches = [
             [
                 'name' => '体重49kg以下の達成',
-                'user_email' => 'yaseko19953131@gmail.com',
-                'user_name' => 'yaseko',
+                'user_email' => 'sou19953131@gmail.com',
+                'user_name' => '月 直人',
                 'user_image' => 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg',
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -27,7 +27,7 @@ class ReachSeeder extends Seeder
             [
                 'name' => 'ドラフト１位８球団から指名される',
                 'user_email' => 'shoheiohtani@example.com',
-                'user_name' => '小谷翔平',
+                'user_name' => '小谷 翔平',
                 'user_image' => 'https://images.pexels.com/photos/1236701/pexels-photo-1236701.jpeg',
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -51,7 +51,7 @@ class ReachSeeder extends Seeder
             [
                 'name' => '宅建を取得する',
                 'user_email' => 'realestateagent@example.com',
-                'user_name' => '正直不動さん',
+                'user_name' => 'miyamae chihi',
                 'user_image' => 'https://images.pexels.com/photos/1237119/pexels-photo-1237119.jpeg',
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -59,7 +59,7 @@ class ReachSeeder extends Seeder
             [
                 'name' => '起業する',
                 'user_email' => 'entrepreneur@example.com',
-                'user_name' => '起業家',
+                'user_name' => '岩本 チー',
                 'user_image' => 'https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg',
                 'created_at' => $now,
                 'updated_at' => $now,

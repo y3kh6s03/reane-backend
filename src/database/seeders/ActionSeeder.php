@@ -9,7 +9,7 @@ class ActionSeeder extends Seeder
 {
     public function run()
     {
-        $reach_hanahana = DB::table('reaches')->where('name', '体重49kg以下の達成')->first();
+        $reach_hanahana = DB::table('reaches')->where('name', '体重65kg以下の達成')->first();
         $skills_hanahana = DB::table('skills')->where('reach_id', $reach_hanahana->id)->get();
 
         $reach_ohtani = DB::table('reaches')->where('name', 'ドラフト１位８球団から指名される')->first();
@@ -32,7 +32,7 @@ class ActionSeeder extends Seeder
             ['name' => 'カロリー制限食事計画', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
             ['name' => '定期的な食事記録', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
             ['name' => '野菜中心の食事', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
-            ['name' => '糖分摂取制限', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
+            ['name' => '糖分摂取制限', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
             ['name' => 'プロテイン摂取', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
             ['name' => '食事バランスチェック', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
             ['name' => '週一回の断食', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[0]->id],
@@ -45,7 +45,7 @@ class ActionSeeder extends Seeder
             ['name' => 'サイクリング', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[1]->id],
             ['name' => 'スイミング', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[1]->id],
             ['name' => 'ウォーキング', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[1]->id],
-            ['name' => 'エアロビクス', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[1]->id],
+            ['name' => 'エアロビクス', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[1]->id],
             // 睡眠に関連するアクション
             ['name' => '早寝早起き', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[2]->id],
             ['name' => '睡眠時間の記録', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[2]->id],
@@ -96,7 +96,7 @@ class ActionSeeder extends Seeder
             ['name' => 'カウンセリング', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
             ['name' => 'メンタルヘルスのチェック', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
             ['name' => 'ポジティブ思考', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
-            ['name' => 'リラクゼーション', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
+            ['name' => 'リラクゼーション', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
             ['name' => '心の健康管理', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
             ['name' => '感情日記', 'is_completed' => true, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
             ['name' => 'ストレス緩和策', 'is_completed' => false, 'reach_id' => $reach_hanahana->id, 'skill_id' => $skills_hanahana[7]->id],
@@ -134,14 +134,14 @@ class ActionSeeder extends Seeder
             ['name' => '審判さんへの態度', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             ['name' => '本を読む', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             ['name' => '応援される人間になる', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
-            ['name' => 'プラス思考', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
+            ['name' => 'プラス思考', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             ['name' => '道具を大切に', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             ['name' => 'ゴミ拾い', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             ['name' => 'あいさつ', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[3]->id],
             // 人間性
             ['name' => '計画性', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
             ['name' => '感謝', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
-            ['name' => '継続力', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
+            ['name' => '継続力', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
             ['name' => '信頼される人間', 'is_completed' => true, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
             ['name' => '礼儀', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
             ['name' => '思いやり', 'is_completed' => false, 'reach_id' => $reach_ohtani->id, 'skill_id' => $skills_ohtani[4]->id],
@@ -187,11 +187,11 @@ class ActionSeeder extends Seeder
             ['name' => 'CSSアニメーションを学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[0]->id],
             // JavaScriptに関連するアクション
             ['name' => 'JavaScriptの基本を学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
-            ['name' => 'ES6の新機能を理解する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
+            ['name' => 'ES6の新機能を理解する', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             ['name' => '非同期処理を学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             ['name' => 'DOM操作を理解する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             ['name' => 'イベントハンドリングを学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
-            ['name' => 'JavaScriptライブラリを使用する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
+            ['name' => 'JavaScriptライブラリを使用する', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             ['name' => 'デバッグ技術を学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             ['name' => 'JavaScriptでプロジェクトを作成', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[1]->id],
             // React.jsに関連するアクション
@@ -235,8 +235,8 @@ class ActionSeeder extends Seeder
             ['name' => '画像の最適化を実行する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
             ['name' => 'コード分割を実施する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
             ['name' => 'キャッシュ戦略を学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
-            ['name' => 'Lazy Loadingを実装する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
-            ['name' => 'ネットワークリクエストを最適化する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
+            ['name' => 'Lazy Loadingを実装する', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
+            ['name' => 'ネットワークリクエストを最適化する', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
             ['name' => 'メモリリークを防止する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
             ['name' => 'パフォーマンスモニタリングツールを使用する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[6]->id],
             // テストに関連するアクション
@@ -244,9 +244,9 @@ class ActionSeeder extends Seeder
             ['name' => 'エンドツーエンドテストを実施する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
             ['name' => 'テスト駆動開発を理解する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
             ['name' => 'テストフレームワークを学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
-            ['name' => 'テストカバレッジを確認する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
+            ['name' => 'テストカバレッジを確認する', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
             ['name' => 'モックを使用する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
-            ['name' => '継続的インテグレーションを学ぶ', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
+            ['name' => '継続的インテグレーションを学ぶ', 'is_completed' => true, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
             ['name' => '自動テストを設定する', 'is_completed' => false, 'reach_id' => $reach_frontend->id, 'skill_id' => $skills_frontend[7]->id],
 
             // backend
@@ -302,7 +302,7 @@ class ActionSeeder extends Seeder
             ['name' => 'キャッシュを利用する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[5]->id],
             ['name' => 'ロードバランシングを実装する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[5]->id],
             ['name' => 'コンテンツデリバリネットワークを利用する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[5]->id],
-            ['name' => 'パフォーマンスモニタリングを行う', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[5]->id],
+            ['name' => 'パフォーマンスモニタリングを行う', 'is_completed' => true, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[5]->id],
             // クラウドサービスに関連するアクション
             ['name' => 'AWSの基本を学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
             ['name' => 'GCPの基本を学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
@@ -310,7 +310,7 @@ class ActionSeeder extends Seeder
             ['name' => 'クラウドストレージを利用する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
             ['name' => 'クラウドコンピューティングを学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
             ['name' => 'サーバーレスアーキテクチャを理解する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
-            ['name' => 'クラウドサービスのセキュリティを学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
+            ['name' => 'クラウドサービスのセキュリティを学ぶ', 'is_completed' => true, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
             ['name' => 'クラウドネイティブアプリケーションを開発する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[6]->id],
             // CI/CDに関連するアクション
             ['name' => '継続的インテグレーションを学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
@@ -318,7 +318,7 @@ class ActionSeeder extends Seeder
             ['name' => '自動デプロイメントを設定する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
             ['name' => 'CI/CDツールを学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
             ['name' => 'パイプラインの最適化を行う', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
-            ['name' => 'デプロイメントストラテジーを理解する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
+            ['name' => 'デプロイメントストラテジーを理解する', 'is_completed' => true, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
             ['name' => 'CI/CDのベストプラクティスを学ぶ', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
             ['name' => 'CI/CDをプロジェクトに導入する', 'is_completed' => false, 'reach_id' => $reach_backend->id, 'skill_id' => $skills_backend[7]->id],
 
@@ -370,20 +370,20 @@ class ActionSeeder extends Seeder
             ['name' => '耐震基準を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[4]->id],
             // 土地・建物に関連するアクション
             ['name' => '土地の評価方法を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
-            ['name' => '建物の評価方法を理解する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
+            ['name' => '建物の評価方法を理解する', 'is_completed' => true, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             ['name' => '不動産鑑定士の業務を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             ['name' => '土地の取引価格を調査する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             ['name' => '建物の取引価格を調査する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             ['name' => '不動産取引の流れを学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             ['name' => '宅地建物取引士の役割を理解する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
-            ['name' => '土地・建物に関する法令を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
+            ['name' => '土地・建物に関する法令を学ぶ', 'is_completed' => true, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[5]->id],
             // 宅建業者の役割に関連するアクション
             ['name' => '宅建業者の業務内容を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者の法的責任を理解する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者の報酬規定を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者の営業活動を理解する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者の顧客対応を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
-            ['name' => '宅建業者の契約書作成を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
+            ['name' => '宅建業者の契約書作成を学ぶ', 'is_completed' => true, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者のトラブル対応を学ぶ', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             ['name' => '宅建業者の業務フローを理解する', 'is_completed' => false, 'reach_id' => $reach_takken->id, 'skill_id' => $skills_takken[6]->id],
             // 実務経験に関連するアクション
@@ -403,21 +403,21 @@ class ActionSeeder extends Seeder
             ['name' => 'ユニークな価値提案を考える', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
             ['name' => '顧客の課題を特定する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
             ['name' => 'アイデアのプロトタイプを作成する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
-            ['name' => 'フィードバックを収集する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
+            ['name' => 'フィードバックを収集する', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
             ['name' => 'アイデアを改良する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
             ['name' => '市場への参入戦略を考える', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[0]->id],
             // マーケットリサーチに関連するアクション
             ['name' => '市場規模を調査する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => 'ターゲット顧客を特定する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
-            ['name' => '市場トレンドを分析する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
+            ['name' => '市場トレンドを分析する', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => '競合企業をリサーチする', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => '顧客インタビューを実施する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => 'アンケート調査を実施する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => 'データを分析する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             ['name' => '市場調査レポートを作成する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[1]->id],
             // ビジネスプラン作成に関連するアクション
-            ['name' => 'ビジネスプランの概要を作成する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
-            ['name' => 'ミッションとビジョンを明確にする', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
+            ['name' => 'ビジネスプランの概要を作成する', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
+            ['name' => 'ミッションとビジョンを明確にする', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
             ['name' => 'マーケティング戦略を策定する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
             ['name' => '財務計画を作成する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
             ['name' => '組織構造を設計する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[2]->id],
@@ -441,7 +441,7 @@ class ActionSeeder extends Seeder
             ['name' => '労働法を理解する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[4]->id],
             ['name' => '税法を理解する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[4]->id],
             ['name' => 'プライバシー法を学ぶ', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[4]->id],
-            ['name' => '法的リスクを管理する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[4]->id],
+            ['name' => '法的リスクを管理する', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[4]->id],
             // マーケティングに関連するアクション
             ['name' => 'マーケティング戦略を立てる', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
             ['name' => 'ソーシャルメディアマーケティングを学ぶ', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
@@ -449,7 +449,7 @@ class ActionSeeder extends Seeder
             ['name' => 'SEO対策を行う', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
             ['name' => 'メールマーケティングを学ぶ', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
             ['name' => '広告キャンペーンを計画する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
-            ['name' => 'マーケティング分析を実施する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
+            ['name' => 'マーケティング分析を実施する', 'is_completed' => true, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
             ['name' => 'ブランド戦略を構築する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[5]->id],
             // チームビルディングに関連するアクション
             ['name' => 'チームの目標を設定する', 'is_completed' => false, 'reach_id' => $reach_kigyo->id, 'skill_id' => $skills_kigyo[6]->id],
