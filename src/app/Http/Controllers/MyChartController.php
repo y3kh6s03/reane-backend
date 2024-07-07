@@ -41,7 +41,7 @@ class MyChartController extends Controller
           $actions[$key] = [
             'id' => $action->id,
             'name' => $action->name,
-            'isCompleted' => $action->is_completed,
+            'is_completed' => $action->is_completed,
           ];
 
           $actionCount++;
@@ -86,11 +86,10 @@ class MyChartController extends Controller
       'skills.*.actions' => 'required|array',
       'skills.*.actions.*.name' => 'required|string|max:255',
       'skills.*.actions.*.id' => 'nullable|integer',
-      // 'skills.*.actions.*.is_completed' => 'required|integer|in:0,1',
-  ]);
+      'skills.*.actions.*.is_completed' => 'required|integer|in:0,1',
+    ]);
 
     if ($validator->fails()) {
-      Log::error('Validation failed:', $validator->errors()->toArray());
       return response()->json([
         'errors' => $validator->errors()
       ], 422);
@@ -345,7 +344,7 @@ class MyChartController extends Controller
           $updateActions[] = [
             'id' => $createdAction->id,
             'name' => $createdAction->name,
-            'isCompleted' => $createdAction->is_completed,
+            'is_completed' => $createdAction->is_completed,
           ];
         } else {
           $existingData = Action::findOrFail($data['id']);
@@ -372,17 +371,19 @@ class MyChartController extends Controller
   {
     $validator = Validator::make($req->all(), [
       'actionId' => 'required|numeric',
-      'isCompleted' => 'required|numeric|in:0,1',
+      'is_completed' => 'required|numeric|in:0,1',
     ]);
 
     if ($validator->fails()) {
+      Log::error('Validation failed:', $validator->errors()->toArray());
       return response()->json(['errors' => $validator->errors(), '$reqDataの中身' => $req], 422);
     }
+
 
     try {
       DB::beginTransaction();
       $action = Action::findOrFail($req->actionId);
-      $newIsCompleted = $req->isCompleted === 1 ? 0 : 1;
+      $newIsCompleted = $req->is_completed === 1 ? 0 : 1;
       $action->update(['is_completed' => $newIsCompleted]);
       DB::commit();
       return response()->json($action, 200);
