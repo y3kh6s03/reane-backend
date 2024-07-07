@@ -17,8 +17,8 @@ class ReachSeeder extends Seeder
         $now = Carbon::now();
         $reaches = [
             [
-                'name' => '体重49kg以下の達成',
-                'user_email' => 'sou19953131@gmail.com',
+                'name' => '体重65kg以下の達成',
+                'user_email' => 'mahi19953131@gmail.com',
                 'user_name' => '月 直人',
                 'user_image' => 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg',
                 'created_at' => $now,

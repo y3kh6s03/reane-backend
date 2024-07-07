@@ -13,7 +13,7 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        $reach_hanahana = DB::table('reaches')->where('name', '体重49kg以下の達成')->first();
+        $reach_mahi = DB::table('reaches')->where('name', '体重65kg以下の達成')->first();
 
         $reach_ohtani = DB::table('reaches')->where('name', 'ドラフト１位８球団から指名される')->first();
 
@@ -26,14 +26,14 @@ class SkillSeeder extends Seeder
         $reach_kigyo = DB::table('reaches')->where('name', '起業する')->first();
 
         $skills = [
-            ['name' => '食事管理', 'reach_id' => $reach_hanahana->id],
-            ['name' => '運動', 'reach_id' => $reach_hanahana->id],
-            ['name' => '睡眠', 'reach_id' => $reach_hanahana->id],
-            ['name' => 'ストレス管理', 'reach_id' => $reach_hanahana->id],
-            ['name' => '水分補給', 'reach_id' => $reach_hanahana->id],
-            ['name' => '健康診断', 'reach_id' => $reach_hanahana->id],
-            ['name' => '休息', 'reach_id' => $reach_hanahana->id],
-            ['name' => 'メンタルケア', 'reach_id' => $reach_hanahana->id],
+            ['name' => '食事管理', 'reach_id' => $reach_mahi->id],
+            ['name' => '運動', 'reach_id' => $reach_mahi->id],
+            ['name' => '睡眠', 'reach_id' => $reach_mahi->id],
+            ['name' => 'ストレス管理', 'reach_id' => $reach_mahi->id],
+            ['name' => '水分補給', 'reach_id' => $reach_mahi->id],
+            ['name' => '健康診断', 'reach_id' => $reach_mahi->id],
+            ['name' => '休息', 'reach_id' => $reach_mahi->id],
+            ['name' => 'メンタルケア', 'reach_id' => $reach_mahi->id],
             // Ohtani's skills
             ['name' => 'キレ', 'reach_id' => $reach_ohtani->id],
             ['name' => 'スピード160km/h', 'reach_id' => $reach_ohtani->id],
