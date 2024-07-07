@@ -12,6 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class MyChartController extends Controller
@@ -79,11 +80,17 @@ class MyChartController extends Controller
       'reachName' => 'required|string|max:255',
       'userEmail' => 'required|email|max:255',
       'userName' => 'required|string|max:255',
-      'userImage' => 'nullable|string|max:255',
+      'userImage' => 'required|string|max:255',
       'skills' => 'required|array',
-    ]);
+      'skills.*.id' => 'nullable|integer',
+      'skills.*.actions' => 'required|array',
+      'skills.*.actions.*.name' => 'required|string|max:255',
+      'skills.*.actions.*.id' => 'nullable|integer',
+      // 'skills.*.actions.*.is_completed' => 'required|integer|in:0,1',
+  ]);
 
     if ($validator->fails()) {
+      Log::error('Validation failed:', $validator->errors()->toArray());
       return response()->json([
         'errors' => $validator->errors()
       ], 422);
@@ -99,7 +106,7 @@ class MyChartController extends Controller
       return response()->json($chartData);
     } catch (Exception $e) {
       DB::rollBack();
-      return response()->json(['error' => $e->getMessage()]);
+      return response()->json(['error' => $e->getMessage()], 500);
     }
   }
 
