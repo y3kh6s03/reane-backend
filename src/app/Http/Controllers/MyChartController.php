@@ -83,13 +83,13 @@ class MyChartController extends Controller
       'userImage' => 'required|string|max:255',
       'skills' => 'required|array',
       'skills.*.id' => 'nullable|integer',
-      'skills.*.actions' => 'required|array',
-      'skills.*.actions.*.name' => 'required|string|max:255',
+      'skills.*.actions' => 'nullable|array',
+      'skills.*.actions.*.name' => 'nullable|string|max:255',
       'skills.*.actions.*.id' => 'nullable|integer',
-      'skills.*.actions.*.is_completed' => 'required|integer|in:0,1',
     ]);
 
     if ($validator->fails()) {
+      Log::error('Validation failed:', $validator->errors()->toArray());
       return response()->json([
         'errors' => $validator->errors()
       ], 422);
@@ -375,7 +375,6 @@ class MyChartController extends Controller
     ]);
 
     if ($validator->fails()) {
-      Log::error('Validation failed:', $validator->errors()->toArray());
       return response()->json(['errors' => $validator->errors(), '$reqDataの中身' => $req], 422);
     }
 
@@ -400,15 +399,5 @@ class MyChartController extends Controller
     $action = Action::where('id', $actionId)->firstOrFail();
     $action->delete();
     return response()->json($action);
-  }
-
-  public function getTest()
-  {
-    return response()->json('getTest OK!!!!!!!');
-  }
-
-  public function postTest()
-  {
-    return response()->json('postTest OK!!!!!!!');
   }
 }
