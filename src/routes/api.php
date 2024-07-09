@@ -40,9 +40,9 @@ Route::prefix('/myChart')
 		Route::patch('/reach/{id}', 'reachPatch')->name('reachPatch');
 		Route::delete('/reach/{id}', 'reachDelete')->name('reachDelete');
 
-		Route::post('/reach/skill/{skillName}', 'skillEdit')->name('skillEdit');
-		Route::patch('/reach/skill/{skillName}', 'skillPatch')->name('skillPatch');
-		Route::delete('/reach/skill/{skillName}', 'skillDelete')->name('skillDelete');
+		Route::post('/reach/skill/{skillId}', 'skillEdit')->name('skillEdit');
+		Route::patch('/reach/skill/{skillId}', 'skillPatch')->name('skillPatch');
+		Route::delete('/reach/skill/{skillId}', 'skillDelete')->name('skillDelete');
 
 		Route::post('/reach/skill/action/{actionid}', 'actionStore')->name('actionStore');
 		Route::put('/reach/skill/action/{actionid}', 'actionPut')->name('actionPut');
